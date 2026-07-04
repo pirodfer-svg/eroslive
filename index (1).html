@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eros Live Agency — Convierte tus transmisiones en tu carrera</title>
+<meta name="description" content="Agencia de formación y crecimiento para streamers en Buzzcast y SELA. Más de 3 años ayudando a nuevos talentos a vivir de sus transmisiones en vivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  :root{
+    --bg: #0E0B12;
+    --bg-soft: #16121C;
+    --panel: #1C1724;
+    --violet: #8B5CF6;
+    --violet-dim: #5B3FA0;
+    --gold: #C9A876;
+    --text: #F5F0EB;
+    --text-dim: #A79FB0;
+    --line: rgba(245,240,235,0.08);
+    --radius: 14px;
+    --ff-display: 'Bebas Neue', sans-serif;
+    --ff-body: 'Inter', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--ff-body);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ul{list-style:none;}
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  h1,h2,h3{
+    font-family:var(--ff-display);
+    letter-spacing:0.02em;
+    line-height:1.05;
+    font-weight:400;
+  }
+
+  .eyebrow{
+    font-family:var(--ff-body);
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--violet);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 30px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:0.01em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--violet), #6D28D9);
+    color:#fff;
+    box-shadow:0 8px 24px rgba(139,92,246,0.35);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 32px rgba(139,92,246,0.5); }
+  .btn-ghost{
+    background:transparent;
+    border-color:var(--line);
+    color:var(--text);
+  }
+  .btn-ghost:hover{ border-color:var(--violet); color:var(--violet); }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(14,11,18,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    font-family:var(--ff-display);
+    font-size:1.5rem;
+    letter-spacing:0.04em;
+  }
+  .logo span{ color:var(--violet); }
+  .logo-img{ height:44px; width:auto; display:block; }
+  .footer-logo-img{ height:56px; width:auto; display:block; margin-bottom:14px; }
+  .nav-links{ display:flex; gap:32px; align-items:center; }
+  .nav-links a{
+    font-size:0.9rem; color:var(--text-dim); font-weight:500;
+    transition:color .2s;
+  }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-cta{ display:flex; gap:12px; align-items:center; }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:140px 0 100px;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 10%, rgba(139,92,246,0.25), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(201,168,118,0.12), transparent 60%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.6rem);
+    margin:18px 0 22px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--violet);
+  }
+  .hero p.lead{
+    font-size:1.15rem;
+    color:var(--text-dim);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+
+  .signal-card{
+    position:relative;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:32px;
+    overflow:hidden;
+  }
+  .signal-card::before{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(139,92,246,0.12), transparent 50%);
+    pointer-events:none;
+  }
+  .signal-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .live-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(239,68,68,0.15);
+    color:#F87171;
+    font-size:0.72rem; font-weight:800; letter-spacing:0.08em;
+    padding:6px 12px; border-radius:100px;
+  }
+  .live-dot{ width:7px; height:7px; border-radius:50%; background:#F87171; animation:pulse 1.4s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  .eq{
+    display:flex; align-items:flex-end; gap:5px;
+    height:120px;
+    margin:12px 0 24px;
+  }
+  .eq span{
+    flex:1;
+    background:linear-gradient(180deg, var(--violet), var(--violet-dim));
+    border-radius:4px;
+    animation:eq 1.2s ease-in-out infinite;
+  }
+  @keyframes eq{ 0%,100%{ transform:scaleY(0.3);} 50%{ transform:scaleY(1);} }
+  .eq span:nth-child(1){ animation-delay:0s; }
+  .eq span:nth-child(2){ animation-delay:0.15s; }
+  .eq span:nth-child(3){ animation-delay:0.3s; }
+  .eq span:nth-child(4){ animation-delay:0.45s; }
+  .eq span:nth-child(5){ animation-delay:0.2s; }
+  .eq span:nth-child(6){ animation-delay:0.35s; }
+  .eq span:nth-child(7){ animation-delay:0.1s; }
+  .eq span:nth-child(8){ animation-delay:0.5s; }
+  .eq span:nth-child(9){ animation-delay:0.25s; }
+  .eq span:nth-child(10){ animation-delay:0.4s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .eq span, .live-dot{ animation:none; }
+  }
+
+  .signal-stats{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .signal-stats div{ border-top:1px solid var(--line); padding-top:14px; }
+  .signal-stats strong{ font-family:var(--ff-display); font-size:1.7rem; color:var(--gold); display:block; }
+  .signal-stats span{ font-size:0.8rem; color:var(--text-dim); }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:110px 0; position:relative; }
+  .section-head{ max-width:600px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(2rem, 3.6vw, 2.8rem); margin-top:12px; }
+  .section-head p{ color:var(--text-dim); margin-top:14px; font-size:1.05rem; }
+
+  /* ---------- WHY ---------- */
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .why-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    transition:border-color .25s, transform .25s;
+  }
+  .why-card:hover{ border-color:var(--violet-dim); transform:translateY(-4px); }
+  .why-icon{
+    width:44px; height:44px;
+    border-radius:12px;
+    background:rgba(139,92,246,0.15);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--violet);
+    font-size:1.3rem;
+    margin-bottom:18px;
+  }
+  .why-card h3{ font-family:var(--ff-body); font-size:1.05rem; font-weight:700; margin-bottom:8px; }
+  .why-card p{ color:var(--text-dim); font-size:0.92rem; }
+
+  /* ---------- PROCESS ---------- */
+  .process{ background:var(--bg-soft); }
+  .process-line{
+    display:flex;
+    justify-content:space-between;
+    position:relative;
+    margin-top:20px;
+  }
+  .process-line::before{
+    content:'';
+    position:absolute; top:22px; left:0; right:0;
+    height:1px;
+    background:var(--line);
+  }
+  .process-step{
+    position:relative;
+    text-align:center;
+    flex:1;
+    padding:0 10px;
+  }
+  .process-num{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--violet);
+    color:var(--violet);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--ff-display);
+    font-size:1.1rem;
+    margin:0 auto 16px;
+    position:relative; z-index:2;
+  }
+  .process-step h3{ font-family:var(--ff-body); font-size:0.95rem; font-weight:700; margin-bottom:6px; }
+  .process-step p{ font-size:0.82rem; color:var(--text-dim); }
+
+  /* ---------- APPS ---------- */
+  .apps-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .app-card{
+    background:linear-gradient(160deg, var(--panel), var(--bg-soft));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:36px;
+    transition:transform .3s;
+  }
+  .app-card:hover{ transform:translateY(-6px); }
+  .app-tag{
+    display:inline-block;
+    font-size:0.7rem; font-weight:800; letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .app-card h3{ font-size:2rem; margin-bottom:10px; }
+  .app-card p{ color:var(--text-dim); margin-bottom:24px; font-size:0.95rem; }
+
+  /* ---------- EARNINGS ---------- */
+  .earn-box{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:44px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .earn-list li{
+    display:flex; gap:12px; align-items:flex-start;
+    margin-bottom:16px;
+    color:var(--text-dim);
+    font-size:0.95rem;
+  }
+  .earn-list li::before{
+    content:'—';
+    color:var(--violet);
+    font-weight:700;
+  }
+  .earn-note{
+    font-size:0.82rem;
+    color:var(--text-dim);
+    border-left:2px solid var(--gold);
+    padding-left:14px;
+    margin-top:20px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 0;
+    cursor:pointer;
+    font-weight:600;
+    font-size:1.02rem;
+  }
+  .faq-q .icon{ transition:transform .25s; color:var(--violet); font-size:1.3rem; }
+  .faq-item.open .faq-q .icon{ transform:rotate(45deg); }
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    color:var(--text-dim);
+    font-size:0.92rem;
+  }
+  .faq-a p{ padding-bottom:20px; }
+  .faq-item.open .faq-a{ max-height:200px; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .testi-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px;
+  }
+  .stars{ color:var(--gold); letter-spacing:2px; margin-bottom:14px; font-size:0.9rem; }
+  .testi-card p{ color:var(--text); font-size:0.95rem; margin-bottom:16px; font-style:italic; }
+  .testi-name{ font-size:0.85rem; color:var(--text-dim); font-weight:600; }
+
+  /* ---------- SOCIAL ---------- */
+  .social-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .social-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 10px;
+    text-align:center;
+    transition:border-color .25s, transform .25s;
+  }
+  .social-card:hover{ border-color:var(--violet); transform:translateY(-4px); }
+  .social-card .s-icon{ font-size:1.6rem; margin-bottom:10px; }
+  .social-card span{ font-size:0.82rem; color:var(--text-dim); font-weight:600; }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    background:linear-gradient(135deg, #3B1F73, #150C24);
+    border-radius:28px;
+    margin:0 28px;
+    padding:70px 40px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .final-cta::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(139,92,246,0.35), transparent 60%);
+  }
+  .final-cta h2{ font-size:clamp(2.2rem,4vw,3.2rem); position:relative; margin-bottom:16px; }
+  .final-cta p{ color:var(--text-dim); position:relative; margin-bottom:30px; }
+  .final-cta .btn{ position:relative; }
+
+  footer{
+    padding:60px 0 30px;
+    border-top:1px solid var(--line);
+    margin-top:60px;
+  }
+  .footer-grid{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px;
+    margin-bottom:40px;
+  }
+  .footer-col h4{ font-size:0.85rem; margin-bottom:14px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; }
+  .footer-col a{ display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:10px; }
+  .footer-col a:hover{ color:var(--violet); }
+  .footer-bottom{ font-size:0.8rem; color:var(--text-dim); text-align:center; border-top:1px solid var(--line); padding-top:24px; }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr 1fr; }
+    .apps-grid{ grid-template-columns:1fr; }
+    .earn-box{ grid-template-columns:1fr; }
+    .testi-grid{ grid-template-columns:1fr; }
+    .social-grid{ grid-template-columns:repeat(2,1fr); }
+    .process-line{ flex-direction:column; gap:28px; }
+    .process-line::before{ display:none; }
+    .nav-links{ display:none; }
+  }
+  @media (max-width: 560px){
+    .why-grid{ grid-template-columns:1fr; }
+    .social-grid{ grid-template-columns:repeat(2,1fr); }
+    nav{ padding:16px 20px; }
+    .hero{ padding:120px 0 70px; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--violet);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo"><img src="assets/logo.png" alt="Eros Live Agency" class="logo-img"></a>
+    <div class="nav-links">
+      <a href="#por-que">Por qué Eros</a>
+      <a href="#apps">Aplicaciones</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://wa.me/message/HRR4AGL2NGR7N1" target="_blank" rel="noopener" class="btn btn-primary" id="navJoin">Únete por WhatsApp</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Agencia de streaming · +3 años de experiencia</span>
+      <h1>Tu carisma tiene un <em>escenario</em>. Nosotros te ayudamos a llenarlo.</h1>
+      <p class="lead">Formamos y acompañamos a streamers en Buzzcast y SELA para que conviertan sus transmisiones en una fuente de ingresos real, con asesoría, comunidad y soporte diario.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/message/HRR4AGL2NGR7N1" target="_blank" rel="noopener" class="btn btn-primary">🟢 Únete por WhatsApp</a>
+        <a href="#apps" class="btn btn-ghost">Conocer las aplicaciones</a>
+      </div>
+    </div>
+
+    <div class="signal-card">
+      <div class="signal-top">
+        <span class="live-pill"><span class="live-dot"></span> EN VIVO</span>
+        <span style="font-size:0.8rem; color:var(--text-dim);">eroslive.agency</span>
+      </div>
+      <div class="eq">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="signal-stats">
+        <div><strong>+3</strong><span>años formando streamers</span></div>
+        <div><strong>2</strong><span>plataformas activas</span></div>
+        <div><strong>24/7</strong><span>soporte a la comunidad</span></div>
+        <div><strong>100%</strong><span>asesoría personalizada</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="por-que">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por qué Eros Live</span>
+      <h2>El acompañamiento marca la diferencia</h2>
+      <p>No solo te conectamos con una app de streaming. Te formamos para que tu contenido crezca de forma sostenible.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon">✦</div><h3>+3 años de experiencia</h3><p>Trayectoria formando streamers desde cero hasta convertir el streaming en su ingreso principal.</p></div>
+      <div class="why-card reveal"><div class="why-icon">◎</div><h3>Asesoría personalizada</h3><p>Un manager asignado que conoce tu perfil y te ayuda a definir tu propio estilo frente a cámara.</p></div>
+      <div class="why-card reveal"><div class="why-icon">↗</div><h3>Crecimiento guiado</h3><p>Estrategias de horarios, interacción y contenido para hacer crecer tu audiencia de forma constante.</p></div>
+      <div class="why-card reveal"><div class="why-icon">☎</div><h3>Soporte diario</h3><p>Resolución rápida de dudas técnicas, de cuenta o de eventos dentro de la app.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🔒</div><h3>Pagos seguros</h3><p>Acompañamiento transparente en cada retiro, sin sorpresas ni intermediarios ocultos.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🎓</div><h3>Capacitación constante</h3><p>Guías, video-tutoriales y sesiones en vivo para pulir tu presentación, audio e iluminación.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" class="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>De un mensaje a tu primer directo</h2>
+      <p>Un proceso simple, pensado para que empieces a transmitir sin fricciones.</p>
+    </div>
+    <div class="process-line">
+      <div class="process-step reveal"><div class="process-num">1</div><h3>Escríbenos</h3><p>Nos contactas por WhatsApp y conoces la agencia.</p></div>
+      <div class="process-step reveal"><div class="process-num">2</div><h3>Asesoría</h3><p>Un manager evalúa tu perfil y responde tus dudas.</p></div>
+      <div class="process-step reveal"><div class="process-num">3</div><h3>Descarga la app</h3><p>Te ayudamos a configurar tu cuenta en Buzzcast o SELA.</p></div>
+      <div class="process-step reveal"><div class="process-num">4</div><h3>Primer directo</h3><p>Transmites acompañado de tu manager y la comunidad.</p></div>
+      <div class="process-step reveal"><div class="process-num">5</div><h3>Generas ingresos</h3><p>Empiezas a monetizar tus transmisiones de forma constante.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="apps">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Aplicaciones</span>
+      <h2>Trabajamos con las plataformas más activas</h2>
+      <p>Te asesoramos para elegir la app que mejor se adapte a tu estilo.</p>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card reveal">
+        <span class="app-tag">Plataforma</span>
+        <h3>Buzzcast</h3>
+        <p>App de streaming en vivo con eventos, regalos virtuales y una comunidad activa de espectadores.</p>
+        <a href="#" class="btn btn-ghost">Conocer Buzzcast</a>
+      </div>
+      <div class="app-card reveal">
+        <span class="app-tag">Plataforma</span>
+        <h3>SELA</h3>
+        <p>App enfocada en interacción en tiempo real, ideal para crecer con constancia y eventos frecuentes.</p>
+        <a href="#" class="btn btn-ghost">Conocer SELA</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ingresos">
+  <div class="container">
+    <div class="earn-box reveal">
+      <div>
+        <span class="eyebrow">Expectativas realistas</span>
+        <h2 style="font-size:2rem; margin:12px 0 18px;">¿Cuánto puedes ganar?</h2>
+        <p style="color:var(--text-dim); font-size:0.95rem;">Tus ingresos dependen de varios factores que trabajamos juntos desde el primer día.</p>
+      </div>
+      <div>
+        <ul class="earn-list">
+          <li>Horas transmitidas por semana</li>
+          <li>Constancia en tu calendario de directos</li>
+          <li>Nivel de interacción con tu audiencia</li>
+          <li>Participación en eventos dentro de la app</li>
+        </ul>
+        <p class="earn-note">No prometemos cifras exactas: tus resultados dependen de tu dedicación y del acompañamiento que recibas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Antes de escribirnos</h2>
+    </div>
+    <div id="faqList">
+      <div class="faq-item">
+        <div class="faq-q">¿Necesito experiencia previa? <span class="icon">+</span></div>
+        <div class="faq-a"><p>No. Te acompañamos desde tu primer directo con guías y asesoría personalizada.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Debo transmitir todos los días? <span class="icon">+</span></div>
+        <div class="faq-a"><p>No es obligatorio, aunque la constancia ayuda a crecer más rápido y a fidelizar audiencia.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Desde qué país puedo aplicar? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Trabajamos con streamers de distintos países de Latinoamérica. Escríbenos para confirmar tu caso.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Necesito equipo especial? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Puedes empezar con tu celular. Más adelante te damos recomendaciones de audio e iluminación.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo recibo mis pagos? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Cada app tiene su propio sistema de retiro. Te acompañamos en cada paso del proceso.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cuánto tarda el proceso de ingreso? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Normalmente puedes empezar a transmitir en pocos días desde tu primer contacto.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Testimonios</span>
+      <h2>Lo que dicen nuestras streamers</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Entré sin experiencia y en pocas semanas ya sabía cómo estructurar mis directos."</p>
+        <div class="testi-name">— Streamer de Eros Live</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Mi manager siempre responde rápido cuando tengo dudas técnicas."</p>
+        <div class="testi-name">— Streamer de Eros Live</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Me ayudaron a organizar mi horario y mi audiencia creció de forma constante."</p>
+        <div class="testi-name">— Streamer de Eros Live</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Encuéntranos</span>
+      <h2>Síguenos en nuestras redes</h2>
+    </div>
+    <div class="social-grid">
+      <a href="https://www.tiktok.com/@agenciaeros?_r=1&_t=ZS-97jj69E86pY" target="_blank" rel="noopener" class="social-card reveal"><div class="s-icon">🎵</div><span>TikTok</span></a>
+      <a href="https://www.instagram.com/agencia_eros?igsh=NW5wY2x4bjB2aXEy" target="_blank" rel="noopener" class="social-card reveal"><div class="s-icon">📸</div><span>Instagram</span></a>
+      <a href="https://www.facebook.com/share/14rZJcBba7w/" target="_blank" rel="noopener" class="social-card reveal"><div class="s-icon">📘</div><span>Facebook</span></a>
+      <a href="https://wa.me/message/HRR4AGL2NGR7N1" target="_blank" rel="noopener" class="social-card reveal"><div class="s-icon">💬</div><span>WhatsApp</span></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="final-cta reveal">
+    <h2>¿Lista para transmitir?</h2>
+    <p>Únete hoy mismo y empieza a construir tu carrera como streamer.</p>
+    <a href="https://wa.me/message/HRR4AGL2NGR7N1" target="_blank" rel="noopener" class="btn btn-primary">🟢 Únete por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="assets/logo.png" alt="Eros Live Agency" class="footer-logo-img">
+        <p style="color:var(--text-dim); font-size:0.88rem; max-width:260px;">Agencia de formación y crecimiento para streamers en Buzzcast y SELA.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="#por-que">Por qué Eros</a>
+        <a href="#apps">Aplicaciones</a>
+        <a href="#proceso">Cómo funciona</a>
+        <a href="#faq">Preguntas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos y condiciones</a>
+      </div>
+      <div class="footer-col">
+        <h4>Redes</h4>
+        <a href="https://wa.me/message/HRR4AGL2NGR7N1" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/agencia_eros?igsh=NW5wY2x4bjB2aXEy" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/share/14rZJcBba7w/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.tiktok.com/@agenciaeros?_r=1&_t=ZS-97jj69E86pY" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Eros Live Agency. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
